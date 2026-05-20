@@ -1,0 +1,28 @@
+body {
+    background-color: blue;
+    margin: 0%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer {
+    height: 700px;
+    width: 450px;
+    background: white;
+    border-radius: 10px;
+}
+
+.addTaskBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+#taskContainer {
+    width: 450px;
+    
+}
