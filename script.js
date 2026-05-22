@@ -2,19 +2,17 @@ const input = document.querySelector("#newTaskInput");
 const addBtn = document.querySelector("#btn");
 const list = document.querySelector("#list");
 
-
-addBtn.addEventListener("click",() => {
+const addNewTask = () => {
     if(input.value != ""){
         const li = document.createElement("li");
         li.innerHTML += `<div class="taskRows">
                             <span class="editTask">${input.value}</span>
-                            <div class="listBtns">
-                                <label>
-                                    Complete
-                                    <input type="checkbox"/>
-                                <button class="editBtn">Edit</button>
-                                <button class="deleteBtn">Delete</button>
-                            </div>
+                        </div>
+                        <div class="listBtns">
+
+                            <button class="completeBtn">Complete</button>
+                            <button class="editBtn">Edit</button>
+                            <button class="deleteBtn">Delete</button>
                         </div>`;    
         input.value = "";
         list.append(li);
@@ -26,6 +24,7 @@ addBtn.addEventListener("click",() => {
         
         })
 
+        const completeBtn = li.querySelector(".completeBtn")
         const editBtn = li.querySelector(".editBtn");
         const editTask = li.querySelector(".editTask");
 
@@ -33,8 +32,9 @@ addBtn.addEventListener("click",() => {
 
             deleteBtn.style.display = "none";
             editBtn.style.display = "none";
-            
-            let oldText = li.childNodes[0].textContent;
+            completeBtn.style.display = "none"
+
+            let oldText = editTask.textContent;
 
             editTask.innerHTML = `<input class ="editInput" type="text" value="${oldText}"></input>`;
             const editInput = li.querySelector(".editInput");
@@ -43,9 +43,31 @@ addBtn.addEventListener("click",() => {
                     editTask.innerHTML = editInput.value;
                     deleteBtn.style.display = "inline";
                     editBtn.style.display = "inline";
+                    completeBtn.style.display = "inline"
+                    
                 }
             })
         })
+        
+        completeBtn.addEventListener("click", () => {
+            li.style.backgroundColor = "green";
+            editTask.style.textDecoration = "line-through";
+            editTask.style.opacity = "0.6";
+            completeBtn.remove();
+            editBtn.remove();
+        })
     }
-})
+}
+
+addBtn.addEventListener("click",addNewTask);
+input.addEventListener(
+"keydown",
+(e) => {
+
+    if(e.key === "Enter") {
+        addNewTask();
+    }
+
+});
+
 
